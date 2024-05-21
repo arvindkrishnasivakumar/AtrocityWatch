@@ -1,4 +1,4 @@
-# scraper
+# AtrocityWatch
 
 ## Project setup
 ```
