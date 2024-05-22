@@ -1,7 +1,29 @@
-import ollama from 'ollama'
+const{default:ollama} = require ('ollama');
+var express = require("express");
+var cors = require("cors");
+const multer = require("multer");
 
-const modelfile = `
-FROM llama2
-SYSTEM "You are mario from super mario bros."
-`
-await ollama.create({ model: 'example', modelfile: modelfile })
+var app = express();
+app.use(cors());
+
+app.listen(5093, () => {
+    console.log('listening');
+});
+
+
+
+
+
+
+
+app.get('/OllamaAPI/AtrocityWatch/GetResponse', (request, response) => {
+    var result;
+    //const message = { role: 'user', content: 'Why is the sky blue?' }
+    ollama.chat({ model: 'llama2', messages:  { role: 'user', content: 'Why is the sky blue?' }, stream: true }).then((res) => {
+        console.log(res + " testicles");
+        response.send(res);
+       
+      });
+      
+    
+});

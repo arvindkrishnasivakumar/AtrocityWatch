@@ -5,7 +5,7 @@ import StoryListing from './components/StoryListing.vue'
 const db_apiURL = "http://localhost:5038/"
 const axios = require("axios");
 const cheerio = require("cheerio");
-
+const AIAPIUrl = "http://localhost:5093/";
 
 
 export default {
@@ -22,6 +22,11 @@ export default {
     async testDB(){
       axios.get(db_apiURL + "db_api/AtrocityWatch/GetNotes").then((response)=>{
         console.log(response.data);
+      })
+    },
+    async testAI(){
+      axios.get(AIAPIUrl + "OllamaAPI/AtrocityWatch/GetResponse").then((response)=>{
+        alert(response.data);
       })
     },
     getWebsiteData(){
@@ -47,9 +52,9 @@ export default {
     }
   },
   created(){
-    this.testDB();
+    //this.testDB();
     this.getWebsiteData();
-    
+    this.testAI();
   }
  
 }
