@@ -25,7 +25,14 @@ export default {
       })
     },
     async testAI(){
-      axios.get(AIAPIUrl + "OllamaAPI/AtrocityWatch/GetResponse").then((response)=>{
+      axios.request({
+        method: 'get',
+        url: AIAPIUrl + 'OllamaAPI/AtrocityWatch/GetResponse',
+        params: {
+          'text': 'why is the sky blue?'
+        }
+      
+      }).then((response)=>{
         alert(response.data);
       })
     },
