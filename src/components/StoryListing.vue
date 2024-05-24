@@ -3,7 +3,9 @@ export default {
   name: 'StoryListing',
   props: {
     title : String,
-    text : String,
+    description : String,
+    img : String,
+    date : String,
     perpetrator: String,
     
   }
@@ -11,9 +13,31 @@ export default {
 </script>
 
 <template>
-    <div>
-        <h1>{{ title }}</h1>
-        <h2>comitted by {{ perpetrator }}</h2>
-
+  
+  <div class="card bg-secondary text-light m-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-lg  pb-0 mb-0">
+      <img :src="img" class="img-fluid rounded-start embed-responsive-item w-100"  :alt="description">
     </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title mb-2">{{ title }}</h5>
+        <p class="card-text mb-2">{{description}}</p>
+        <p class="card-text mb-2"> <bold class="text-danger">{{ perpetrator }}</bold> <small class="text-dark-green">{{ date }}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+     
+       
+
+
 </template>
+
+<style>
+  .card-img-top {
+  width: 100%;
+  height: 30vh;
+  object-fit: contain;
+  }
+</style>
