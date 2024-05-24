@@ -15,6 +15,7 @@ export default {
   },
   data() {
     return{
+      loading : true,
       stories : [],
     }
   },
@@ -36,7 +37,7 @@ export default {
         alert(response.data);
       })
     },
-    getWebsiteData(){
+    async getWebsiteData(){
       let self = this;
       let url = '/news/';
       let dataArray = [];
@@ -55,13 +56,17 @@ export default {
       });
       self.stories = dataArray;
       console.log(dataArray);
-     
+ 
     }
   },
   created(){
     //this.testDB();
-    this.getWebsiteData();
-    this.testAI();
+    const fetchData = async () => {
+      await this.getWebsiteData();
+    }
+    fetchData();
+  
+    //this.testAI();
   }
  
 }
@@ -69,21 +74,49 @@ export default {
 </script>
 
 <template>
-  <StoryListing/>
-  <h1>Title</h1>
-  <div class="wrapper">
+ <nav class="navbar navbar-expand-lg bg-secondary text-light">
+  <div class="container-fluid">
+    <a class="navbar-brand text-light" href="#">AtrocityWatch</a>
+    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+    </div> -->
+  </div>
+</nav>
+  
+  <!-- <div class="wrapper">
     <div v-for="(story,index) in stories" :key="index">
       <span v-text="story"></span>
       {{ story }}
-     <!-- <StoryListing v-for="(story,index) instories" :title="story" text="this happened and etc." perpetrator="test country" :key="index"/>  -->
+    <StoryListing v-for="(story,index) instories" :title="story" text="this happened and etc." perpetrator="test country" :key="index"/> 
     </div>
+    
+  </div> -->
+  <div class="container" >
+    <h1 class="m-3">New Stories</h1>
+    {{ stories }}
+    <StoryListing v-for="(story,index) in stories" :key="index" :title="story" description="Test description blah blah blah" date= "24 May 2024" img="https://www.aljazeera.com/wp-content/uploads/2024/05/AFP__20240520__34TB3MF__v1__HighRes__PalestinianIsraelConflict-1716473680.jpg?resize=770%2C513&quality=80" perpetrator="Country"/>
     
   </div>
   
-  
 </template>
 
-<style>
+<!-- <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -92,4 +125,4 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-</style>
+</style> -->
