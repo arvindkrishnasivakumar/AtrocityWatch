@@ -2,7 +2,7 @@
 
 <script>
 import StoryListing from './components/StoryListing.vue'
-const db_apiURL = "http://localhost:5038/"
+const db_apiURL = "http://localhost:3000/"
 const axios = require("axios");
 const cheerio = require("cheerio");
 const AIAPIUrl = "http://localhost:5093/";
@@ -20,8 +20,20 @@ export default {
     }
   },
   methods : {
+    async testDBPost(){
+      axios.request({
+        method : 'post',
+        url : db_apiURL,
+        params: {
+          title: 'Test Story',
+          rating: 5,
+          img: '#',
+          reasons: ["Because", "and also because"],
+        }
+      })
+    },
     async testDB(){
-      axios.get(db_apiURL + "db_api/AtrocityWatch/GetNotes").then((response)=>{
+      axios.get(db_apiURL).then((response)=>{
         console.log(response.data);
       })
     },
@@ -61,11 +73,11 @@ export default {
   },
   created(){
     //this.testDB();
-    const fetchData = async () => {
-      await this.getWebsiteData();
-    }
-    fetchData();
-  
+    // const fetchData = async () => {
+    //   await this.getWebsiteData();
+    // }
+    // fetchData();
+    this.testDBPost();
     //this.testAI();
   }
  

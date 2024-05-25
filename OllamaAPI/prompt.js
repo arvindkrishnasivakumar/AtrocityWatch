@@ -6,6 +6,6 @@ I'll assume that by "war crime," you mean an atrocity committed during wartime. 
 
 Here's an example:
 
-("United States", "9/10", ["The use of napalm, a highly flammable and toxic substance, caused severe burns and long-term health effects to civilians and soldiers alike. It was often used to attack villages and cities, causing widespread destruction and terror."]) Do the same for this:
+("United States", "9", ["The use of napalm, a highly flammable and toxic substance, caused severe burns and long-term health effects to civilians and soldiers alike. It was often used to attack villages and cities, causing widespread destruction and terror."]) Do the same for this:
 `;
 module.exports = warCrimePrompt;
