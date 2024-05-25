@@ -3,10 +3,8 @@
 <script>
 import StoryListing from './components/StoryListing.vue'
 const db_apiURL = "http://localhost:3000/"
-const axios = require("axios");
-const cheerio = require("cheerio");
 const AIAPIUrl = "http://localhost:5093/";
-
+const loading = ref(true);
 
 export default {
   name: 'App',
@@ -16,7 +14,7 @@ export default {
   data() {
     return{
       loading : true,
-      stories : [],
+      stories : null,
     }
   },
   methods : {
@@ -53,7 +51,7 @@ export default {
       let self = this;
       let url = '/news/';
       let dataArray = [];
-      axios.get(url).then(function (response){
+      await axios.get(url).then(function (response){
         let html = response.data;
        // console.log(html);
         let $ = cheerio.load(html);
@@ -63,12 +61,27 @@ export default {
          // console.log ($(this).text());
           dataArray.push({
             'title' : title,
+            'img' : $(this).find('div.gc__content').find('div.gc__media').find('a').find('img').attr('src'),
           });
+          dataArray.forEach((element) => {
+            console.log(element.title);
+            axios.request({
+              method: 'get',
+              url: AIAPIUrl + 'OllamaAPI/AtrocityWatch/GetResponse',
+              params: {
+                text: element.title,
+              }
+              
+              }).then((response)=>{
+                alert(response.data);
+            })
+          });
+
         });
       });
       self.stories = dataArray;
       console.log(dataArray);
- 
+      loading.value = false;
     }
   },
   created(){
@@ -78,10 +91,7 @@ export default {
     // }
     // fetchData();
     this.testDBPost();
-    //this.testAI();
-  }
- 
-}
+   // this.getWebsiteData();
 
 </script>
 
@@ -121,7 +131,6 @@ export default {
   </div> -->
   <div class="container" >
     <h1 class="m-3">New Stories</h1>
-    {{ stories }}
     <StoryListing v-for="(story,index) in stories" :key="index" :title="story" description="Test description blah blah blah" date= "24 May 2024" img="https://www.aljazeera.com/wp-content/uploads/2024/05/AFP__20240520__34TB3MF__v1__HighRes__PalestinianIsraelConflict-1716473680.jpg?resize=770%2C513&quality=80" perpetrator="Country"/>
     
   </div>
