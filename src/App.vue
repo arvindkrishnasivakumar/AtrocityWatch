@@ -91,7 +91,9 @@ export default {
     // }
     // fetchData();
     this.testDBPost();
-   // this.getWebsiteData();
+    this.getWebsiteData();
+  }
+}
 
 </script>
 
