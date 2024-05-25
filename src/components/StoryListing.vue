@@ -23,7 +23,7 @@ export default {
       <div class="card-body">
         <h5 class="card-title mb-2">{{ title }}</h5>
         <p class="card-text mb-2">{{description}}</p>
-        <p class="card-text mb-2"> <bold class="text-danger">{{ perpetrator }}</bold> <small class="text-dark-green">{{ date }}</small></p>
+        <p class="card-text mb-2"> <strong class="text-danger">{{ perpetrator }}</strong> <small class="text-dark-green">{{ date }}</small></p>
       </div>
     </div>
   </div>
