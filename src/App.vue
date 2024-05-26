@@ -3,8 +3,9 @@ import StoryListing from './components/StoryListing.vue'
 const db_apiURL = "http://localhost:3000/"
 const AIAPIUrl = "http://localhost:5093/";
 const loading = ref(true);
-axios = require(‘axios’);
-cheerio = require(‘cheerio’);
+import axios from 'axios';
+import cheerio from 'cheerio';
+import { ref } from 'vue';
 
 export default {
   name: 'App',
