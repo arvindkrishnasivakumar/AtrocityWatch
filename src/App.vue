@@ -92,11 +92,7 @@ export default {
             });
         },
         created(){
-            //this.testDB();
-            // const fetchData = async () => {
-            //   await this.getWebsiteData();
-            // }
-            // fetchData();
+
             this.testDBPost();
             this.getWebsiteData();
         }
