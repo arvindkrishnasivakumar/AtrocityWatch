@@ -29,6 +29,7 @@ export default {
             rating: 69,
             img: '#',
             reasons: ["yes", "no"],
+            perpetrator : 'Israel',
             }
         })
         },

@@ -16,13 +16,7 @@ db.once('open', () => console.log('connected to database'));
 app.use(express.json());
 
 
-`const storySchema = new Schema({
-    title: String,
-    rating: Number,
-    img: String,
-    reasons: [String],
-  });
-`
+
 
 app.listen(3000,()=>{
     console.log("listening");
@@ -35,6 +29,7 @@ app.post('/', async (req, res) => {
         rating : req.query.rating,
         img : req.query.img,
         reasons : req.query.reasons, 
+        perpetrator : req.query.perpetrator,
     });
     console.log(story);
     try{
