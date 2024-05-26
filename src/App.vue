@@ -3,8 +3,9 @@ import StoryListing from './components/StoryListing.vue'
 const db_apiURL = "http://localhost:3000/"
 const AIAPIUrl = "http://localhost:5093/";
 const loading = ref(true);
-axios = require('axios');
-cheerio = require('cheerio');
+import axios from 'axios';
+import cheerio from 'cheerio';
+import { ref } from 'vue';
 
 export default {
   name: 'App',
@@ -74,15 +75,17 @@ export default {
                 }
                 });
                 await axios.request({
-                method : 'post',
-                url : db_apiURL,
-                params: {
-                    title: element.title,
-                    rating: req.data[1],
-                    img: element.img,
-                    reasons: req.data[2],
-                    perpetrator : req.data[0],
-                }
+                    method : 'post',
+                    url : db_apiURL,
+                    params: {
+                        title: element.title,
+                        rating: req.data[1],
+                        img: element.img,
+                        reasons: req.data[2],
+                        perpetrator : req.data[0],
+                    }
+                }).then((res) => {
+                    console.log(res);
                 })
             
 
