@@ -39,6 +39,7 @@ app.post('/', async (req, res) => {
     try{
         await story.save();
         res.send(story + "Updated");
+        console.log(story + "Updated");
     }
     catch (error){
         res.send(error);

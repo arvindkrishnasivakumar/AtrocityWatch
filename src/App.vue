@@ -68,11 +68,11 @@ export default {
             dataArray.forEach(async (element) => {
                 console.log(element.title);
                 var req = await axios.request({
-                method: 'get',
-                url: AIAPIUrl + 'OllamaAPI/AtrocityWatch/GetResponse',
-                params: {
-                    text: element.title,
-                }
+                    method: 'get',
+                    url: AIAPIUrl + 'OllamaAPI/AtrocityWatch/GetResponse',
+                    params: {
+                        text: element.title,
+                    }
                 });
                 await axios.request({
                     method : 'post',
