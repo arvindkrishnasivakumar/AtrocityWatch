@@ -15,6 +15,7 @@ export default {
     return{
       loading : true,
       stories : null,
+      finalArticles : null,
     }
   },
   methods : {
@@ -61,23 +62,31 @@ export default {
          // console.log ($(this).text());
           dataArray.push({
             'title' : title,
-            'img' : $(this).find('div.gc__content').find('div.gc__media').find('a').find('img').attr('src'),
+            'img' : $(this).find('div.gc__image_wrap').find('div.article-card__image-wrap').find('div.responsive-image').find('img').attr('src'),
           });
-          dataArray.forEach((element) => {
+          dataArray.forEach(async (element) => {
             console.log(element.title);
-            axios.request({
+            var req = await axios.request({
               method: 'get',
               url: AIAPIUrl + 'OllamaAPI/AtrocityWatch/GetResponse',
               params: {
                 text: element.title,
               }
-              
-              }).then((response)=>{
-                alert(response.data);
+            });
+            await axios.request({
+              method : 'post',
+              url : db_apiURL,
+              params: {
+                title: element.title,
+                rating: req.data[1],
+                img: element.img,
+                reasons: req.data[2],
+                perpetrator : req.data[0],
+              }
             })
-          });
+         
 
-        });
+          });
       });
       self.stories = dataArray;
       console.log(dataArray);
