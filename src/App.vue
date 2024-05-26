@@ -98,7 +98,7 @@ export default {
         },
         created(){
 
-            this.testDBPost();
+           // this.testDBPost();
             this.getWebsiteData();
         }
     }
