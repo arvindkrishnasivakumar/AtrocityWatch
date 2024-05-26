@@ -29,13 +29,14 @@ app.listen(3000,()=>{
 })
 
 app.post('/', async (req, res) => {
-    //console.log(req.query);
+    console.log('bruh');
     const story = new Story({
         title : req.query.title,
         rating : req.query.rating,
         img : req.query.img,
-        reasons : req.query.reasons,
+        reasons : req.query.reasons, 
     });
+    console.log(story);
     try{
         await story.save();
         res.send(story + "Updated");
@@ -43,8 +44,8 @@ app.post('/', async (req, res) => {
     }
     catch (error){
         res.send(error);
+        console.log(error);
     }
-  
    
     // db.stories.aggregate([
     //     {

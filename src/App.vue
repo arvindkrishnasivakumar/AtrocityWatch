@@ -2,11 +2,11 @@
 import StoryListing from './components/StoryListing.vue'
 const db_apiURL = "http://localhost:3000/"
 const AIAPIUrl = "http://localhost:5093/";
-const loading = ref(true);
+
 import axios from 'axios';
 import cheerio from 'cheerio';
 import { ref } from 'vue';
-
+const loading = ref(true);
 export default {
   name: 'App',
   components: {
@@ -25,10 +25,10 @@ export default {
             method : 'post',
             url : db_apiURL,
             params: {
-            title: 'Test Story',
-            rating: 5,
+            title: 'Joe biden actually dies',
+            rating: 69,
             img: '#',
-            reasons: ["Because", "and also because"],
+            reasons: ["yes", "no"],
             }
         })
         },
@@ -66,7 +66,7 @@ export default {
                 'img' : $(this).find('div.gc__image_wrap').find('div.article-card__image-wrap').find('div.responsive-image').find('img').attr('src'),
             });
             dataArray.forEach(async (element) => {
-                console.log(element.title);
+             //   console.log(element.title);
                 var req = await axios.request({
                     method: 'get',
                     url: AIAPIUrl + 'OllamaAPI/AtrocityWatch/GetResponse',
@@ -74,6 +74,7 @@ export default {
                         text: element.title,
                     }
                 });
+                console.log("schlawg" + req.data);
                 await axios.request({
                     method : 'post',
                     url : db_apiURL,
@@ -92,16 +93,18 @@ export default {
             });
             });
             self.stories = dataArray;
-            console.log(dataArray);
+           // console.log(dataArray);
             loading.value = false;
             });
         },
-        created(){
-
-           // this.testDBPost();
-            this.getWebsiteData();
-        }
+    },
+    created(){
+        //console.log('rest');
+      //  this.testDBPost();
+        this.testAI();
+        this.getWebsiteData();
     }
+    
 }
 
 </script>
@@ -142,7 +145,7 @@ export default {
   </div> -->
   <div class="container" >
     <h1 class="m-3">New Stories</h1>
-    <StoryListing v-for="(story,index) in stories" :key="index" :title="story" description="Test description blah blah blah" date= "24 May 2024" img="https://www.aljazeera.com/wp-content/uploads/2024/05/AFP__20240520__34TB3MF__v1__HighRes__PalestinianIsraelConflict-1716473680.jpg?resize=770%2C513&quality=80" perpetrator="Country"/>
+    <StoryListing v-for="(story,index) in stories" :key="index" :title="story.title" description="Test description blah blah blah" date= "24 May 2024" img="https://www.aljazeera.com/wp-content/uploads/2024/05/AFP__20240520__34TB3MF__v1__HighRes__PalestinianIsraelConflict-1716473680.jpg?resize=770%2C513&quality=80" perpetrator="Country"/>
     
   </div>
   

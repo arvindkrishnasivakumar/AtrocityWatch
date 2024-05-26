@@ -14,7 +14,7 @@ app.listen(5093, () => {
 app.get('/OllamaAPI/AtrocityWatch/GetResponse', async (request, response) => {
     // Data should be passed like request.query.text.
     // I hardcoded a random instance of a warcrime to test code
- //   console.log(request.query.text + "cock")
+    console.log(request.query.text);
     const result = await ollama.chat({
         model: 'llama3',
         messages: [{ role: 'user', content: warCrimePrompt + request.query.text}],
