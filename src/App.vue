@@ -1,5 +1,3 @@
-
-
 <script>
 import StoryListing from './components/StoryListing.vue'
 const db_apiURL = "http://localhost:3000/"
@@ -18,90 +16,91 @@ export default {
       finalArticles : null,
     }
   },
-  methods : {
-    async testDBPost(){
-      axios.request({
-        method : 'post',
-        url : db_apiURL,
-        params: {
-          title: 'Test Story',
-          rating: 5,
-          img: '#',
-          reasons: ["Because", "and also because"],
-        }
-      })
-    },
-    async testDB(){
-      axios.get(db_apiURL).then((response)=>{
-        console.log(response.data);
-      })
-    },
-    async testAI(){
-      axios.request({
-        method: 'get',
-        url: AIAPIUrl + 'OllamaAPI/AtrocityWatch/GetResponse',
-        params: {
-          'text': 'why is the sky blue?'
-        }
-      
-      }).then((response)=>{
-        alert(response.data);
-      })
-    },
-    async getWebsiteData(){
-      let self = this;
-      let url = '/news/';
-      let dataArray = [];
-      await axios.get(url).then(function (response){
-        let html = response.data;
-       // console.log(html);
-        let $ = cheerio.load(html);
-      //  console.log($("<section id=\"news-feed-container\" tabindex=\"-1\" aria-label=\"Content Feed\"> article").attr('aria-label'));
-        $("#news-feed-container article").each(function(){
-          const title = $(this).find('div.gc__content').find('div.gc__header-wrap').find('h3').find('a').find('span').text();
-         // console.log ($(this).text());
-          dataArray.push({
-            'title' : title,
-            'img' : $(this).find('div.gc__image_wrap').find('div.article-card__image-wrap').find('div.responsive-image').find('img').attr('src'),
-          });
-          dataArray.forEach(async (element) => {
-            console.log(element.title);
-            var req = await axios.request({
-              method: 'get',
-              url: AIAPIUrl + 'OllamaAPI/AtrocityWatch/GetResponse',
-              params: {
-                text: element.title,
-              }
+    methods : {
+        async testDBPost(){
+        axios.request({
+            method : 'post',
+            url : db_apiURL,
+            params: {
+            title: 'Test Story',
+            rating: 5,
+            img: '#',
+            reasons: ["Because", "and also because"],
+            }
+        })
+        },
+        async testDB(){
+        axios.get(db_apiURL).then((response)=>{
+            console.log(response.data);
+        })
+        },
+        async testAI(){
+        axios.request({
+            method: 'get',
+            url: AIAPIUrl + 'OllamaAPI/AtrocityWatch/GetResponse',
+            params: {
+            'text': 'why is the sky blue?'
+            }
+        
+        }).then((response)=>{
+            alert(response.data);
+        })
+        },
+        async getWebsiteData(){
+        let self = this;
+        let url = '/news/';
+        let dataArray = [];
+        await axios.get(url).then(function (response){
+            let html = response.data;
+        // console.log(html);
+            let $ = cheerio.load(html);
+        //  console.log($("<section id=\"news-feed-container\" tabindex=\"-1\" aria-label=\"Content Feed\"> article").attr('aria-label'));
+            $("#news-feed-container article").each(function(){
+            const title = $(this).find('div.gc__content').find('div.gc__header-wrap').find('h3').find('a').find('span').text();
+            // console.log ($(this).text());
+            dataArray.push({
+                'title' : title,
+                'img' : $(this).find('div.gc__image_wrap').find('div.article-card__image-wrap').find('div.responsive-image').find('img').attr('src'),
             });
-            await axios.request({
-              method : 'post',
-              url : db_apiURL,
-              params: {
-                title: element.title,
-                rating: req.data[1],
-                img: element.img,
-                reasons: req.data[2],
-                perpetrator : req.data[0],
-              }
-            })
-         
+            dataArray.forEach(async (element) => {
+                console.log(element.title);
+                var req = await axios.request({
+                method: 'get',
+                url: AIAPIUrl + 'OllamaAPI/AtrocityWatch/GetResponse',
+                params: {
+                    text: element.title,
+                }
+                });
+                await axios.request({
+                method : 'post',
+                url : db_apiURL,
+                params: {
+                    title: element.title,
+                    rating: req.data[1],
+                    img: element.img,
+                    reasons: req.data[2],
+                    perpetrator : req.data[0],
+                }
+                })
+            
 
-          });
-      });
-      self.stories = dataArray;
-      console.log(dataArray);
-      loading.value = false;
+            });
+            });
+            self.stories = dataArray;
+            console.log(dataArray);
+            loading.value = false;
+            });
+        },
+        created(){
+            //this.testDB();
+            // const fetchData = async () => {
+            //   await this.getWebsiteData();
+            // }
+            // fetchData();
+            this.testDBPost();
+            this.getWebsiteData();
+        }
     }
-  },
-  created(){
-    //this.testDB();
-    // const fetchData = async () => {
-    //   await this.getWebsiteData();
-    // }
-    // fetchData();
-    this.testDBPost();
-    this.getWebsiteData();
-  }
 }
 
 </script>
