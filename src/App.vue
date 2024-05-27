@@ -76,6 +76,7 @@ export default {
                     }
                 });
                 console.log('schlawg' + req.data[0].length);
+                console.log( typeof req.data)
             //     await axios.request({
             //         method : 'post',
             //         url : db_apiURL,
