@@ -75,20 +75,21 @@ export default {
                         text: element.title,
                     }
                 });
-                console.log("schlawg" + req.data);
-                await axios.request({
-                    method : 'post',
-                    url : db_apiURL,
-                    params: {
-                        title: element.title,
-                        rating: req.data[1],
-                        img: element.img,
-                        reasons: req.data[2],
-                        perpetrator : req.data[0],
-                    }
-                }).then((res) => {
-                    console.log(res);
-                })
+                console.log('schlawg' + req.data[0].length);
+                console.log( typeof req.data)
+            //     await axios.request({
+            //         method : 'post',
+            //         url : db_apiURL,
+            //         params: {
+            //             title: element.title,
+            //             rating: req.data[1],
+            //             img: element.img,
+            //             reasons: req.data[2],
+            //             perpetrator : req.data[0],
+            //         }
+            //     }).then((res) => {
+            //         console.log(res);
+            //     })
             
 
             });
