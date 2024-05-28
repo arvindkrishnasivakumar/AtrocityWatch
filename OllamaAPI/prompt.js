@@ -1,6 +1,6 @@
 const warCrimePrompt = `
 Given information, tell me if it's a war crime in the given format starting from this prompt:
-{country : "Country", severity : "severity of the crime on a scale 1-10", reasons : ["reasons"]}
+{"country : "Country", severity : "severity of the crime on a scale 1-10", reasons : ["reasons"]}
 
 I'll assume that by "war crime," you mean an atrocity committed during wartime. If there is no war crime then say only "()" AND ABSOLUTELY NOTHING ELSE. DO NOT SAY "no war crime here!" Make your decision using international humanitarian and war crime law and precedents; certain stories may describe a crime, but we want only WAR CRIMES as defined by international law.
 
