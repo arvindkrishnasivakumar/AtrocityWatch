@@ -47,7 +47,8 @@ export default {
             }
         
         }).then((response)=>{
-            alert(response.data);
+            //alert(response.data);
+            console.log(response.data);
         })
         },
         async getWebsiteData(){
@@ -61,11 +62,15 @@ export default {
         //  console.log($("<section id=\"news-feed-container\" tabindex=\"-1\" aria-label=\"Content Feed\"> article").attr('aria-label'));
             $("#news-feed-container article").each(function(){
             const title = $(this).find('div.gc__content').find('div.gc__header-wrap').find('h3').find('a').find('span').text();
-            // console.log ($(this).text());
+            const img =  $(this).find('div.gc__image-wrap').find('div.article-card__image-wrap').find('div.responsive-image').find('img').attr('src');
+            const date = $(this).find('div.gc__content').find('footer.gc__footer').find('div.gc__meta').find('div.gc__date').find('div.gc__date__date').find('div.date-simple').find('span[aria-hidden="true"]').text();
+            console.log ("date: " + date);
             dataArray.push({
                 'title' : title,
-                'img' : $(this).find('div.gc__image_wrap').find('div.article-card__image-wrap').find('div.responsive-image').find('img').attr('src'),
+                'img' : img,
+                'date' : Date.parse(date),
             });
+            
         });
         dataArray.forEach(async (element) => {
             //   console.log(element.title);
@@ -78,20 +83,24 @@ export default {
             });
             console.log(req.data.country);
         
-            console.log( req.data)
-        //     await axios.request({
-        //         method : 'post',
-        //         url : db_apiURL,
-        //         params: {
-        //             title: element.title,
-        //             rating: req.data[1],
-        //             img: element.img,
-        //             reasons: req.data[2],
-        //             perpetrator : req.data[0],
-        //         }
-        //     }).then((res) => {
-        //         console.log(res);
-        //     })
+            console.log( req.data.reasons)
+            if(req.data != "nah bruh"){
+                await axios.request({
+                    method : 'post',
+                    url : db_apiURL,
+                    params: {
+                        title: element.title,
+                        rating: req.data.severity,
+                        img: element.img,
+                        reasons: req.data.reasons,
+                        perpetrator : req.data.country,
+                        date : element.date,
+                    }
+                }).then((res) => {
+                    console.log(res);
+                })
+            }
+     
         
 
         });
@@ -101,11 +110,25 @@ export default {
             loading.value = false;
             });
         },
+        async updateStoryData(){
+            await axios.request({
+                method : 'get',
+                url : db_apiURL,
+            }).sort({datetime: -1})
+            .limit(10)
+            .exec(function(err, data) {
+            // SORT FUNCTION
+                data.sort((a, b) => a.datetime < b.datetime ? -1 : (a.datetime > b.datetime ? 1 : 0))
+                console.log("schlud" + data);
+            });
+            //console.log("schlawh" + e);
+        }
     },
     created(){
         //console.log('rest');
       //  this.testDBPost();
-        this.testAI();
+        //this.testAI();
+        this.updateStoryData();
         this.getWebsiteData();
     }
     
@@ -149,7 +172,7 @@ export default {
   </div> -->
   <div class="container" >
     <h1 class="m-3">New Stories</h1>
-    <StoryListing v-for="(story,index) in stories" :key="index" :title="story.title" description="Test description blah blah blah" date= "24 May 2024" img="https://www.aljazeera.com/wp-content/uploads/2024/05/AFP__20240520__34TB3MF__v1__HighRes__PalestinianIsraelConflict-1716473680.jpg?resize=770%2C513&quality=80" perpetrator="Country"/>
+    <StoryListing v-for="(story,index) in stories" :key="index" :title="story.title" description="Test description blah blah blah" date= "24 May 2024" :img="story.img" perpetrator="Country"/>
     
   </div>
   

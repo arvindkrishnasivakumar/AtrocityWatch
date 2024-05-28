@@ -7,6 +7,7 @@ const storySchema = new Schema({
   img: {type: String},
   reasons: {type: [String]},
   perpetrator : {type: String},
+  date : {type: Date},
 });
 
 const Story = model('Story', storySchema);

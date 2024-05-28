@@ -30,6 +30,7 @@ app.post('/', async (req, res) => {
         img : req.query.img,
         reasons : req.query.reasons, 
         perpetrator : req.query.perpetrator,
+        date : req.query.date,
     });
     console.log(story);
     try{
@@ -67,7 +68,7 @@ app.post('/', async (req, res) => {
 
 app.get('/', async(req,res) => {
     const stories = await Story.find();
-    res.json(stories);
+    res.send(stories);
 })
 
 
