@@ -8,6 +8,9 @@ I'll assume that by "war crime," you mean an atrocity committed during wartime. 
 
 Here's an example:
 
-{ "country" : "United States", "severity" : "9", "reasons" : ["The use of napalm, a highly flammable and toxic substance, caused severe burns and long-term health effects to civilians and soldiers alike", "It was often used to attack villages and cities, causing widespread destruction and terror"]} Do the same for this:
-`;
+{ "country" : "United States", "severity" : "9", "reasons" : ["The use of napalm, a highly flammable and toxic substance, caused severe burns and long-term health effects to civilians and soldiers alike", "It was often used to attack villages and cities, causing widespread destruction and terror"]} 
+DO NOT RESPOND WITH ANYTHING OTHER THAN THIS JSON OUTPUT. YOUR RESPONSE SHOULD ONLY CONTAIN THE CONTENT FROM THE OPEN "{" TO THE CLOSED "}" IF THERE IS NO WAR CRIME AT ALL RESPOND WITH NOTHING BUT "()". NO OTHER TEXT SHOULD BE PRESENT
+Do the same for this:
+`
+;
 module.exports = warCrimePrompt;
