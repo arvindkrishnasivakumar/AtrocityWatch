@@ -76,9 +76,9 @@ export default {
                     text: element.title,
                 }
             });
-            console.log(req.data.title);
+            console.log(req.data.country);
         
-            console.log( typeof req.data)
+            console.log( req.data)
         //     await axios.request({
         //         method : 'post',
         //         url : db_apiURL,

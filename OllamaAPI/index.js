@@ -25,7 +25,6 @@ app.get('/OllamaAPI/AtrocityWatch/GetResponse', async (request, response) => {
     }
     catch (error){
       console.log(error);
-
       response.send("nah bruh");
     }
      
