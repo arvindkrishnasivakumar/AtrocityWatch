@@ -24,7 +24,7 @@ app.get('/OllamaAPI/AtrocityWatch/GetResponse', async (request, response) => {
       response.json(JSON.parse(result.message.content.replaceAll("(", "{").replaceAll(")","}")));
     }
     catch (error){
-      console.log("error");
+      console.log(error);
       response.send("nah bruh");
     }
      
