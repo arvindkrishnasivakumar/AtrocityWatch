@@ -20,5 +20,5 @@ app.get('/OllamaAPI/AtrocityWatch/GetResponse', async (request, response) => {
         messages: [{ role: 'user', content: warCrimePrompt + request.query.text}],
       })
       console.log(result.message.content);
-      response.json(JSON.parse(result.message.content.replaceAll("(", "{").replaceAll(")"."}")));
+      response.json(JSON.parse(result.message.content.replaceAll("(", "{").replaceAll(")","}")));
 });
