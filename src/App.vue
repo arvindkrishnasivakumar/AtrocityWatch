@@ -66,34 +66,36 @@ export default {
                 'title' : title,
                 'img' : $(this).find('div.gc__image_wrap').find('div.article-card__image-wrap').find('div.responsive-image').find('img').attr('src'),
             });
-            dataArray.forEach(async (element) => {
-             //   console.log(element.title);
-                var req = await axios.request({
-                    method: 'get',
-                    url: AIAPIUrl + 'OllamaAPI/AtrocityWatch/GetResponse',
-                    params: {
-                        text: element.title,
-                    }
-                });
-                console.log('schlawg' + req.data[0].length);
-                console.log( typeof req.data)
-            //     await axios.request({
-            //         method : 'post',
-            //         url : db_apiURL,
-            //         params: {
-            //             title: element.title,
-            //             rating: req.data[1],
-            //             img: element.img,
-            //             reasons: req.data[2],
-            //             perpetrator : req.data[0],
-            //         }
-            //     }).then((res) => {
-            //         console.log(res);
-            //     })
-            
+        });
+        dataArray.forEach(async (element) => {
+            //   console.log(element.title);
+            var req = await axios.request({
+                method: 'get',
+                url: AIAPIUrl + 'OllamaAPI/AtrocityWatch/GetResponse',
+                params: {
+                    text: element.title,
+                }
+            });
+            console.log(req.data.title);
+        
+            console.log( typeof req.data)
+        //     await axios.request({
+        //         method : 'post',
+        //         url : db_apiURL,
+        //         params: {
+        //             title: element.title,
+        //             rating: req.data[1],
+        //             img: element.img,
+        //             reasons: req.data[2],
+        //             perpetrator : req.data[0],
+        //         }
+        //     }).then((res) => {
+        //         console.log(res);
+        //     })
+        
 
-            });
-            });
+        });
+       
             self.stories = dataArray;
            // console.log(dataArray);
             loading.value = false;

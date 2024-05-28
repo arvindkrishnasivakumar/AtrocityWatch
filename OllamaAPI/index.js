@@ -18,7 +18,15 @@ app.get('/OllamaAPI/AtrocityWatch/GetResponse', async (request, response) => {
     const result = await ollama.chat({
         model: 'llama3',
         messages: [{ role: 'user', content: warCrimePrompt + request.query.text}],
-      })
-      console.log(result.message.content);
+    })
+    console.log(result.message.content);
+    try{
       response.json(JSON.parse(result.message.content.replaceAll("(", "{").replaceAll(")","}")));
+    }
+    catch (error){
+      console.log("error");
+      response.send("nah bruh");
+    }
+     
+     
 });
