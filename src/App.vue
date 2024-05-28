@@ -128,7 +128,7 @@ export default {
         //console.log('rest');
       //  this.testDBPost();
         //this.testAI();
-        this.updateStoryData();
+        //this.updateStoryData();
         this.getWebsiteData();
     }
     
