@@ -5,7 +5,7 @@ export default {
     title : String,
     description : String,
     img : String,
-    date : String,
+    date : Date,
     perpetrator: String,
     
   }
@@ -14,7 +14,7 @@ export default {
 
 <template>
   
-  <div class="card bg-secondary text-light m-3" style="max-width: 540px;">
+  <div class="card bg-secondary text-light m-3" style="">
   <div class="row g-0">
     <div class="col-lg  pb-0 mb-0">
       <img :src="img" class="img-fluid rounded-start embed-responsive-item w-100"  :alt="description">
@@ -23,7 +23,7 @@ export default {
       <div class="card-body">
         <h5 class="card-title mb-2">{{ title }}</h5>
         <p class="card-text mb-2">{{description}}</p>
-        <p class="card-text mb-2"> <strong class="text-danger">{{ perpetrator }}</strong> <small class="text-dark-green">{{ date }}</small></p>
+        <p class="card-text mb-2"> <strong class="text-danger">{{ perpetrator }}</strong> <small class="text-dark-green">{{ date.toLocaleDateString() }}</small></p>
       </div>
     </div>
   </div>

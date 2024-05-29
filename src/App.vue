@@ -113,25 +113,21 @@ export default {
             loading.value = false;
             });
         },
-        // async updateStoryData(){
-        //     await axios.request({
-        //         method : 'get',
-        //         url : db_apiURL,
-        //     }).sort({datetime: -1})
-        //     .limit(10)
-        //     .exec(function(err, data) {
-        //     // SORT FUNCTION
-        //         data.sort((a, b) => a.datetime < b.datetime ? -1 : (a.datetime > b.datetime ? 1 : 0))
-        //         console.log("schlud" + data);
-        //     });
-        //     //console.log("schlawh" + e);
-        // }
+        async updateStoryData(){
+            const res = await axios.request({
+                method : 'get',
+                 url : db_apiURL,
+            })
+            this.finalArticles = res.data;
+          
+             //console.log("schlawh" + e);
+        }
     },
     created(){
         //console.log('rest');
       //  this.testDBPost();
         //this.testAI();
-        //this.updateStoryData();
+        this.updateStoryData();
         this.getWebsiteData();
     }
     
@@ -175,7 +171,7 @@ export default {
   </div> -->
   <div class="container" >
     <h1 class="m-3">New Stories</h1>
-    <StoryListing v-for="(story,index) in stories" :key="index" :title="story.title" description="Test description blah blah blah" date= "24 May 2024" :img="story.img" perpetrator="Country"/>
+    <StoryListing v-for="(story,index) in finalArticles" :key="index" :title="story.title" :description="story.reasons[0]" :date= "new Date(story.date.toString())" :img="story.img" :perpetrator="story.perpetrator"/>
     
   </div>
   

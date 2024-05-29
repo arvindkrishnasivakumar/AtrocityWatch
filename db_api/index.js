@@ -67,8 +67,14 @@ app.post('/', async (req, res) => {
 })
 
 app.get('/', async(req,res) => {
-    const stories = await Story.find();
-    res.send(stories);
+    const stories = await Story.find().sort('-date')
+    .limit(10);
+    var out = [];
+    for await (const doc of stories) {
+        out.push(doc); // Prints documents one at a time
+      //  console.log(doc);
+      }
+    res.send(out);
 })
 
 
