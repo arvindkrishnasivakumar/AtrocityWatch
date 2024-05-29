@@ -84,8 +84,9 @@ export default {
             console.log(req.data.country);
         
             console.log( req.data.reasons)
-            if(req.data != "nah bruh"){
-                await axios.request({
+            if(req.data != "nah bruh" && req.data.reasons != null && req.data.country != null && req.data.severity != null){
+                if(req.data.reasons.length > 0 && req.data.country.length > 0 && req.data.severity > 0){
+                  await axios.request({
                     method : 'post',
                     url : db_apiURL,
                     params: {
@@ -96,9 +97,11 @@ export default {
                         perpetrator : req.data.country,
                         date : element.date,
                     }
-                }).then((res) => {
-                    console.log(res);
-                })
+                  }).then((res) => {
+                      console.log(res);
+                  })
+                }
+                
             }
      
         
