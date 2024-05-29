@@ -172,7 +172,7 @@ export default {
   </div> -->
   <div class="container" >
     <h1 class="m-3">New Stories</h1>
-    <StoryListing v-for="(story,index) in finalArticles" :key="index" :title="story.title" :description="story.reasons[0]" :date= "new Date(story.date.toString())" :img="story.img" :perpetrator="story.perpetrator"/>
+    <StoryListing v-for="(story,index) in finalArticles" :key="index" :title="story.title" :reasons="story.reasons" :date= "new Date(story.date.toString())" :img="story.img" :perpetrator="story.perpetrator" :severity="story.rating"/>
     
   </div>
   
